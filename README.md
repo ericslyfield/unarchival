@@ -1,2 +1,2 @@
 # unarchival
-A bot that deletes tweets.
+A twitter bot.
