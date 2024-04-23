@@ -5,11 +5,18 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 
-test: str = os.getenv('ABC')
-app_name: str = os.getenv('APP_NAME')
+api_key: str = os.getenv('API_KEY')
+api_secret: str = os.getenv('API_SECRET')
+access_token: str = os.getenv('ACCESS_TOKEN')
+access_secret: str = os.getenv('ACCESS_SECRET')
 
-print(test)
-print(app_name)
+auth = tweepy.OAuthHandler(api_key, api_secret)
+auth.set_access_token(access_token, access_secret)
 
-#auth = tweepy.OAuthHandler("API_KEY", "API_SECRET_KEY")
-#auth.set_acess_token("ACCESS_TOKEN", "SECRET_ACESS_TOKEN")
+api = tweepy.API(auth)
+
+try:
+    api.verify_credentials()
+    print("Success! Your API call worked!")
+except:
+    print("Oops. Something went wrong!")
